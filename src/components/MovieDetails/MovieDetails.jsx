@@ -1,7 +1,5 @@
-import { Cast } from 'components/Cast/Cast';
-import { Reviews } from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'Services/API';
 
 export const MovieDetails = () => {
@@ -25,7 +23,7 @@ export const MovieDetails = () => {
   const { title, overview, genres, poster_path, vote_average } = movieDetail;
 
   return (
-    <>
+    <main>
       <div>
         <img src={poster_path} alt="" />
         <h2>{title}</h2>
@@ -41,8 +39,12 @@ export const MovieDetails = () => {
             })}
         </ul>
       </div>
-      <Cast />
-      <Reviews />
-    </>
+      <div>
+        <h2>Additional information</h2>
+        <Link to="cast">Cast</Link>
+        <Link to="reviews">Reviews</Link>
+      </div>
+      <Outlet />
+    </main>
   );
 };

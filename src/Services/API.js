@@ -33,3 +33,39 @@ export const getMovieDetails = async id => {
     }
   );
 };
+
+export const getMovieCast = async id => {
+  return await fetch(
+    `${BASE_URL}/movie/${id}/credits?language=en-US`,
+    options
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
+};
+
+export const getMovieReviews = async id => {
+  return await fetch(
+    `${BASE_URL}/movie/${id}/reviews?language=en-US`,
+    options
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
+};
+
+export const getMovieBySearchText = async searchText => {
+  return await fetch(
+    `${BASE_URL}/search/movie?query=${searchText}&include_adult=false&language=en-US&page=1`,
+    options
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
+};

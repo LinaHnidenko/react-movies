@@ -8,7 +8,7 @@ export const TrendingMovies = () => {
     const fetchData = async () => {
       try {
         const data = await getTrendingMovie();
-        // console.log(data.results.id);
+
         return setMovies(data.results);
       } catch (error) {
         console.log(error);

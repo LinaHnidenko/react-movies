@@ -20,21 +20,23 @@ export const Reviews = () => {
   }, [id]);
 
   return (
-    <ul>
-      {reviews.length ? (
-        reviews.map(({ author, id, content, created_at }) => {
-          return (
-            <li key={id}>
-              {' '}
-              <h3>Author: {author}</h3>
-              <p>{content}</p>
-              <p>Created at: {created_at}</p>
-            </li>
-          );
-        })
-      ) : (
-        <p>We don't have reviews for this movie.</p>
-      )}
-    </ul>
+    <>
+      <ul>
+        {reviews.length ? (
+          reviews.map(({ author, id, content, created_at }) => {
+            return (
+              <li key={id}>
+                {' '}
+                <h3>Author: {author}</h3>
+                <p>{content}</p>
+                <p>Created at: {created_at}</p>
+              </li>
+            );
+          })
+        ) : (
+          <p>We don't have reviews for this movie.</p>
+        )}
+      </ul>
+    </>
   );
 };

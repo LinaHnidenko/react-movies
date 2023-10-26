@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getMovieBySearchText } from 'Services/API';
+import css from './Movies.module.css';
 
 export const Movies = () => {
   const [searchText, setSearchText] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const [moviesByQuery, setMoviesByQuery] = useState([]);
+
+  const movieName = searchParams.get('query') ?? '';
+  const location = useLocation();
 
   const handleChange = ({ target }) => {
     setSearchText(target.value);
@@ -17,11 +21,11 @@ export const Movies = () => {
   };
 
   useEffect(() => {
-    const searchText = searchParams.get('query');
-    if (!searchText) return;
+    if (movieName === '') return;
+    setMoviesByQuery([]);
     const fetchMovies = async () => {
       try {
-        const movies = await getMovieBySearchText(searchText);
+        const movies = await getMovieBySearchText(movieName);
 
         return setMoviesByQuery(movies.results);
       } catch (error) {
@@ -29,27 +33,32 @@ export const Movies = () => {
       }
     };
     fetchMovies();
-  }, [searchParams]);
+  }, [movieName]);
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div>
+      <form onSubmit={handleSubmit} className={css.form}>
+        <label className="form-label">
           Search movies
-          <input type="text" onChange={handleChange} />
+          <input type="text" onChange={handleChange} className="form-control" />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-info">
+          Submit
+        </button>
       </form>
-
-      {moviesByQuery.length ? (
-        moviesByQuery.map(({ id, title }) => (
-          <li key={id}>
-            <Link to={`/movies/${id}`}>{title}</Link>
-          </li>
-        ))
-      ) : (
-        <p>Sorry, we can't find movie by this name.</p>
-      )}
-    </main>
+      <ul>
+        {moviesByQuery.length > 0 ? (
+          moviesByQuery.map(({ id, title }) => (
+            <li key={id}>
+              <Link to={`/movies/${id}`} state={location}>
+                {title}
+              </Link>
+            </li>
+          ))
+        ) : (
+          <p>Please, enter a valid movie name.</p>
+        )}
+      </ul>
+    </div>
   );
 };

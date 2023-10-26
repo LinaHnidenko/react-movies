@@ -1,14 +1,23 @@
-import { Home } from 'components/pages/Home';
-import { Movies } from 'components/pages/Movies';
+// import { lazy } from 'react';
 import { Route, Routes } from 'react-router';
-import { Cast } from './Cast/Cast';
+import { Home } from 'components/pages/Home';
 import { Layout } from './Layout/Layout';
+
+import { Movies } from 'components/pages/Movies';
+import { Cast } from './Cast/Cast';
 import { MovieDetails } from './MovieDetails/MovieDetails';
 import { Reviews } from './Reviews/Reviews';
 
+// Not working
+
+// const Movies = lazy(() => import('components/pages/Movies'));
+// const Cast = lazy(() => import('./Cast/Cast'));
+// const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
+// const Reviews = lazy(() => import('./Reviews/Reviews'));
+
 export const App = () => {
   return (
-    <>
+    <div className="container">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -20,6 +29,6 @@ export const App = () => {
           </Route>
         </Route>
       </Routes>
-    </>
+    </div>
   );
 };

@@ -1,0 +1,36 @@
+.btn {
+  text-decoration: none;
+  width: 100px;
+  font-size: 0.7rem;
+  color: #fafafa;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #fafafa;
+  background: #252525;
+  box-shadow: 3px 3px #fafafa;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.btn:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+.bbtn:hover {
+  background-color: #1c84ff;
+}
+.container {
+  margin-top: 30px;
+  display: flex;
+
+  flex-direction: column;
+  gap: 20px;
+}
+.addInfo {
+  display: flex;
+  flex-direction: column;
+}
+.link {
+  text-decoration: none;
+}
